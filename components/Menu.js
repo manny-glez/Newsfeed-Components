@@ -31,3 +31,54 @@ let menuItems = [
 
   Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
 */
+
+function menuMaker() {
+  // creation of elements
+  const menu = document.createElement("div");
+  const list = document.createElement("ul");
+  const liOne = document.createElement("li");
+  const liTwo = document.createElement("li");
+  const liThree = document.createElement("li");
+  const liFour = document.createElement("li");
+  const liFive = document.createElement("li");
+  const liSix = document.createElement("li");
+
+  //giving elements classes
+  menu.className = "menu";
+
+  // giving elements content
+  liOne.textContent = menuItems[0];
+  liTwo.textContent = menuItems[1];
+  liThree.textContent = menuItems[2];
+  liFour.textContent = menuItems[3];
+  liFive.textContent = menuItems[4];
+  liSix.textContent = menuItems[5];
+
+  // appending elements together
+  menu.appendChild(list);
+  list.appendChild(liOne);
+  list.appendChild(liTwo);
+  list.appendChild(liThree);
+  list.appendChild(liFour);
+  list.appendChild(liFive);
+  list.appendChild(liSix);
+
+  // menu button
+  const button = document.querySelector(".menu-button")
+
+  // event listener
+  button.addEventListener("click", event => {
+    menu.classList.toggle("menu--open")
+  })
+
+  return menu
+}
+
+// This is the menu component
+const menu = menuMaker()
+
+// This is the insertion point
+const enter = document.querySelector(".header")
+
+// We're appending the menu to div.header
+enter.appendChild(menu)
