@@ -1,7 +1,7 @@
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
-const data = [
+const articleData = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
@@ -114,3 +114,51 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker(articleObj) {
+  // creation of elements
+  const div = document.createElement("div");
+  const title = document.createElement("h2");
+  const date = document.createElement("p");
+  const contentOne = document.createElement("p");
+  const contentTwo = document.createElement("p");
+  const contentThree = document.createElement("p");
+  const button = document.createElement("span");
+
+  // Giving elements classes
+  div.className = "article";
+  date.className = "date";
+  button.className = "expandButton";
+
+  // Giving elements content
+  title.textContent = articleObj.title;
+  date.textContent = articleObj.date;
+  contentOne.textContent = articleObj.firstParagraph;
+  contentTwo.textContent = articleObj.secondParagraph;
+  contentThree.textContent = articleObj.thirdParagraph;
+  button.textContent = "+"
+
+  // Appending elements together
+  div.appendChild(title);
+  div.appendChild(date);
+  div.appendChild(contentOne);
+  div.appendChild(contentTwo);
+  div.appendChild(contentThree);
+  div.appendChild(button);
+
+  // add event listener to the span.expandButton it should toggle 'article-open'
+
+  button.addEventListener("click", event => {
+    div.classList.toggle("article-open")
+  })
+
+  return div
+}
+const enter = document.querySelector(".articles")
+
+articleData.forEach(articleObj => {
+  // 1 - make a div
+  const article = articleMaker(articleObj)
+  // 2 - attach to DOM
+  enter.append(article);
+})
