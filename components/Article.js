@@ -1,7 +1,7 @@
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
-const data = [
+const articleData = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
@@ -86,6 +86,27 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Elder Scrolls VI set to Come out Tomorrow',
+    date: 'Nov 5th, 2018',
+    firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
+        moff wicket tatooine luke.Solo wampa wampa calrissian yoda moff.Darth grievous darth gonk darth hutt.Darth baba skywalker
+        watto fett jango maul han.Mon ewok sidious sidious lando kenobi grievous gamorrean solo.Yoda wedge utapau darth calamari.
+        Hutt calamari darth jabba.Darth dooku amidala organa moff.Boba darth binks solo hutt skywalker dantooine skywalker.Qui - gonn
+        jar twi'lek jinn leia jango skywalker mon.`,
+
+    secondParagraph: `Grievous fett calamari anakin skywalker hutt.Alderaan darth kenobi darth r2- d2
+        windu mothma.Sidious darth calamari moff.Wampa mothma sith wedge solo mara.Darth gonk maul sith moff chewbacca palpatine
+        mace amidala.C - 3po solo skywalker anakin yoda leia.Maul wampa bespin watto jade ewok darth jabba.Lando dantooine moff
+        k - 3po dantooine luke.Fisto mandalore darth wedge if you can see this hello c - 3p0 ahsoka.Secura moff palpatine fett.Anakin sith darth darth.Moff
+        solo leia ben ponda jade.Binks jango aayla skywalker skywalker cade.Mustafar darth ventress anakin watto.Yavin jawa sebulba
+        owen jinn tatooine sith organa.`,
+
+    thirdParagraph: `Dagobah hutt jawa leia calamari ventress skywalker yoda. Binks wicket hutt coruscant sidious
+        naboo ackbar tatooine. Hutt lars padmé darth. Maul solo darth darth jabba qui-gon chewbacca darth maul. Moff baba wicket
+        han. C-3po antilles moff qui-gon ahsoka aayla dooku amidala. Palpatine droid amidala droid k-3po twi'lek padmé wookiee. Leia
+        moff calamari mon obi-wan. Solo grievous lando coruscant. Jinn darth palpatine obi-wan mon.`
   }
 ];
 
@@ -101,8 +122,57 @@ const data = [
     {three separate paragraph elements}
 
     <span class="expandButton">+</span>
-  </div>
+  </div> */
 
+  const insertionPoint = document.querySelector('.articles')
+
+  function articleMaker(articleObj) {
+    // DOM Node Creation
+    const article = document.createElement('div') // Parent Node
+    const title = document.createElement('h2')
+    const date = document.createElement('p')
+    const paragraph1 = document.createElement('p')
+    const paragraph2 = document.createElement('p')
+    const paragraph3 = document.createElement('p')
+    const expndButton = document.createElement('span')
+    const icon = document.createElement("i");
+
+    // Adding classes
+    article.classList.add('article')
+    date.classList.add('date')
+    // expndButton.classList.add('expandButton')
+    icon.classList.add("fas", "fa-plus-square", "expandButton")
+
+    // Appending to parent node (div.article)
+    article.appendChild(title)
+    article.appendChild(date)
+    article.appendChild(paragraph1)
+    article.appendChild(paragraph2)
+    article.appendChild(paragraph3)
+    // article.appendChild(expndButton)
+    article.appendChild(icon)
+
+    // Giving data to the article
+    title.textContent = articleObj.title
+    date.textContent = articleObj.date
+    paragraph1.textContent = articleObj.firstParagraph
+    paragraph2.textContent = articleObj.secondParagraph
+    paragraph3.textContent = articleObj.thirdParagraph
+    // expndButton.textContent = '+'
+
+    icon.addEventListener('click', () => {
+      article.classList.toggle('article-open')
+    })
+
+    return article
+  }
+
+
+  // Creation & appending to the DOM
+  articleData.map(article => {
+    insertionPoint.append( articleMaker(article) )
+  })
+/*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
